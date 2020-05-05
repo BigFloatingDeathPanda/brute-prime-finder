@@ -8,3 +8,6 @@ TO DO: Research
     -Quadratic Sieve
     -General Number Field Sieve
     -Really, just come back to this later (or never) since brute force was the goal.
+
+This project can be found on the web at:
+https://bigfloatingdeathpanda.github.io/brute-prime-finder/
