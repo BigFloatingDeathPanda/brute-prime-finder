@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prime Finder</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <p id="list">
+
+    </p>
+    <script>
+       let myNumber = prompt("Enter a number (2 or larger) and I'll tell you all prime numbers up to that number", 2);
+       let primeList = [2];
+       let trackPrimeStatus = false;
+
+            //pre build note: not asking if mynumber is prime.  just find primes (i) using the loop below.
+            //Push to an array.  Alert the array.  Later when you know how to push output to the webpage you can do that.
+
+       for (let i = 2; i<= myNumber; i++) {
+           let j = 2;           
+            //Take this value of i, and divide it by everything up to it's self (could do half of itself once you know your loop is working)
+            //Actually you could do up to sqrt(i) which is more efficient that i/2.
+
+            for (j = 2; j<=Math.ceil(Math.sqrt(i)); j++) {         
+                if (i%j == 0) { //if remainder is zero, it's not prime, no need to check further.  Set to false and break out of the check.
+                    trackPrimeStatus = false;
+                    break;
+                } else {
+                    trackPrimeStatus = true;
+                    continue;
+                }
+
+            } //end of j loop
+
+            if (trackPrimeStatus == true) {
+                primeList.push(i);
+            }
+            
+       } //end of i loop
+       const output = document.getElementById("list");
+       for (i = 0; i < primeList.length; i++) {
+            output.innerHTML = output.innerHTML + primeList[i] + "<br>";
+       }
+       alert(`There are ${primeList.length} primes from 2 to ${myNumber} and they are listed below`);
+
+    </script>
+</body>
+</html>
