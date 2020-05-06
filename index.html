@@ -5,10 +5,12 @@
     <meta charset="UTF-8"/>
 </head>
 <body>
+    <!--<h1>Not recommended to enter a number larger than 10,000</h1>-->
     <p id="list">
 
     </p>
     <script>
+        "use strict";
        let myNumber = prompt("Enter a number (2 or larger) and I'll tell you all prime numbers up to that number", 2);
        let primeList = [2];
        let trackPrimeStatus = false;
@@ -38,10 +40,58 @@
             
        } //end of i loop
        const output = document.getElementById("list");
-       for (i = 0; i < primeList.length; i++) {
+       for (let i = 0; i < primeList.length; i++) {
             output.innerHTML = output.innerHTML + primeList[i] + "<br>";
        }
-       alert(`There are ${primeList.length} primes from 2 to ${myNumber} and they are listed below`);
+
+       output.innerHTML = output.innerHTML + "Palindromic Primes in this List:" + "<br>";
+       let possiblePalindromList = [2];
+       let palendromePrimeList = [2];
+
+       for (let i = 0; i < primeList.length; i++) {
+           if (primeList[i].toString().charAt(0) == 2 || primeList[i].toString().charAt(0) == 4 || 
+                    primeList[i].toString().charAt(0) == 6 || primeList[i].toString().charAt(0) == 8 ||
+                    primeList[i].toString().charAt(0) == 5) {
+                continue;
+            } else {
+                possiblePalindromList.push(primeList[i]); //creats list of potential palindromes. Iterate over this list.  Could've done in this else statement but nah
+            }
+        }
+
+        for (let i = 0; i < possiblePalindromList.length; i++) {
+            let trakePalendromeStatus = false;
+            for (let j = 0; j < possiblePalindromList[i].toString().length-1; j++) {
+
+/* Debugging            console.log(`i = ${i}, and j = ${j} and 
+                        current possbilePalendromeList element = ${possiblePalindromList[i]} and
+                        current check first character = ${possiblePalindromList[i].toString().charAt(j)} and
+                        current check last character = ${possiblePalindromList[i].toString().charAt(possiblePalindromList[j].toString().length - j)}`);
+
+                        */
+
+
+                if (possiblePalindromList[i].toString().charAt(j) != possiblePalindromList[i].toString().charAt(possiblePalindromList[i].toString().length - 1 - j)) {
+                    trakePalendromeStatus = false;
+                    break;                    
+                } else {
+                    trakePalendromeStatus = true;
+                    continue;
+                }
+            }
+            if (trakePalendromeStatus == true) {
+                palendromePrimeList.push(possiblePalindromList[i]);
+            }
+
+        }
+
+       for (let i = 0; i < palendromePrimeList.length; i++) {
+           output.innerHTML = output.innerHTML + palendromePrimeList[i] + "<br>";
+       }
+
+       alert(`There are ${primeList.length} primes from 2 to ${myNumber} and they are listed below.
+            Of those listed, ${palendromePrimeList.length} are palindromes`);
+
+
 
     </script>
 </body>
