@@ -45,31 +45,46 @@
        }
 
        output.innerHTML = output.innerHTML + "Palindromic Primes in this List:" + "<br>";
-       let possiblePalindromList = [2];
+       let possiblePalindromList = [];
        let palendromePrimeList = [2];
 
        for (let i = 0; i < primeList.length; i++) {
            if (primeList[i].toString().charAt(0) == 2 || primeList[i].toString().charAt(0) == 4 || 
-                    primeList[i].toString().charAt(0) == 6 || primeList[i].toString().charAt(0) == 8 ||
-                    primeList[i].toString().charAt(0) == 5) {
+                    primeList[i].toString().charAt(0) == 6 || primeList[i].toString().charAt(0) == 8) {
                 continue;
             } else {
                 possiblePalindromList.push(primeList[i]); //creats list of potential palindromes. Iterate over this list.  Could've done in this else statement but nah
             }
         }
 
+//I think I can do this more efficiently, AND get single digit palindromes if I reverse string and check for equality.
+
         for (let i = 0; i < possiblePalindromList.length; i++) {
-            let trakePalendromeStatus = false;
-            for (let j = 0; j < possiblePalindromList[i].toString().length-1; j++) {
+            let reversedArray = [];
+            for (let j = 0; j < possiblePalindromList[i].toString().length; j++) {
+                reversedArray.unshift(possiblePalindromList[i].toString().charAt(j));
+            }
+            console.log(`i = ${i}.  And
+            Current Possible Palindrom = ${possiblePalindromList[i]} And
+            That Number Reversed is ${reversedArray}`);
+            if (reversedArray.join("") == possiblePalindromList[i].toString()) {
+                palendromePrimeList.push(possiblePalindromList[i]);
+            }
+        }
+
+
+//        for (let i = 0; i < possiblePalindromList.length; i++) {
+  //          let trakePalendromeStatus = false;
+    //        for (let j = 0; j < possiblePalindromList[i].toString().length-1; j++) {
 
 /* Debugging            console.log(`i = ${i}, and j = ${j} and 
                         current possbilePalendromeList element = ${possiblePalindromList[i]} and
                         current check first character = ${possiblePalindromList[i].toString().charAt(j)} and
                         current check last character = ${possiblePalindromList[i].toString().charAt(possiblePalindromList[j].toString().length - j)}`);
 
-                        */
+                */        
 
-
+/*
                 if (possiblePalindromList[i].toString().charAt(j) != possiblePalindromList[i].toString().charAt(possiblePalindromList[i].toString().length - 1 - j)) {
                     trakePalendromeStatus = false;
                     break;                    
@@ -83,7 +98,7 @@
             }
 
         }
-
+*/
        for (let i = 0; i < palendromePrimeList.length; i++) {
            output.innerHTML = output.innerHTML + palendromePrimeList[i] + "<br>";
        }
